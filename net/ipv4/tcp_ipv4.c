@@ -2328,6 +2328,7 @@ static void get_tcp4_sock(struct sock *sk, struct seq_file *f, int i)
 	__be32 src = inet->inet_rcv_saddr;
 	__u16 destp = ntohs(inet->inet_dport);
 	__u16 srcp = ntohs(inet->inet_sport);
+	__u8 seq_state = sk->sk_state;
 	int rx_queue;
 	int state;
 
@@ -2346,6 +2347,9 @@ static void get_tcp4_sock(struct sock *sk, struct seq_file *f, int i)
 		timer_active	= 0;
 		timer_expires = jiffies;
 	}
+
+	if (inet->transparent)
+		seq_state |= 0x80;
 
 	state = inet_sk_state_load(sk);
 	if (state == TCP_LISTEN)

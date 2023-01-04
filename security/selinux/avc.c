@@ -367,7 +367,7 @@ static struct avc_xperms_decision_node
 	struct extended_perms_decision *xpd;
 
 	xpd_node = kmem_cache_zalloc(avc_xperms_decision_cachep,
-				     GFP_NOWAIT | __GFP_NOWARN);
+			GFP_NOWAIT | __GFP_NOWARN);
 	if (!xpd_node)
 		return NULL;
 
@@ -712,12 +712,13 @@ static struct avc_node *avc_insert(struct selinux_avc *avc,
 	spin_lock_irqsave(lock, flag);
 	hlist_for_each_entry(pos, head, list) {
 		if (pos->ae.ssid == ssid &&
-			pos->ae.tsid == tsid &&
-			pos->ae.tclass == tclass) {
+		    pos->ae.tsid == tsid &&
+		    pos->ae.tclass == tclass) {
 			avc_node_replace(avc, node, pos);
 			goto found;
 		}
 	}
+
 	hlist_add_head_rcu(&node->list, head);
 found:
 	spin_unlock_irqrestore(lock, flag);
