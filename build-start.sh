@@ -10,7 +10,7 @@ fi
 
 # Clone toolchain
 if [[ "$*" =~ "clang" ]]; then
-    git clone --depth=1 https://gitlab.com/okta-10/mystic-clang.git clang
+    git clone --depth=1 https://gitlab.com/shekhawat2/clang-builds -b master clang
 elif [[ "$*" =~ "gcc" ]]; then
     git clone --depth=1 https://github.com/okta-10/gcc-arm32.git arm32
     git clone --depth=1 https://github.com/okta-10/gcc-arm64.git arm64
