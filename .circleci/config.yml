@@ -1,0 +1,16 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: okta10/docker:ubuntu
+    steps:
+      - run:
+          name: Building SuperRyzenKernel
+          command: |
+            wget https://raw.githubusercontent.com/TianWalkzzMiku/SRyzen-4.19/stable/build-start.sh
+            bash build-start.sh beta clang
+            cd kernel
+            wget https://raw.githubusercontent.com/TianWalkzzMiku/SRyzen-4.19/stable/build.sh
+            bash build.sh whyred clang
+            wget https://raw.githubusercontent.com/TianWalkzzMiku/SRyzen-4.19/stable/build-final.sh
+            bash build-final.sh clang
